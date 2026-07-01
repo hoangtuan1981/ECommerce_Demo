@@ -1,3 +1,6 @@
+using Identity.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// TODO
+//builder.Services.AddDbContext<IdentityDbContext>(options =>
+//{
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("IdentityDb"));
+//});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
