@@ -4,6 +4,7 @@ namespace Identity.Domain.Entities;
 
 public class User : AggregateRoot
 {
+    public string UserName { get; private set; } = default!;
     public string Email { get; private set; } = default!;
 
     public string PasswordHash { get; private set; } = default!;

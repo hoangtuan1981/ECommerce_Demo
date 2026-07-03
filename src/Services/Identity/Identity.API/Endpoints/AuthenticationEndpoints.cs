@@ -19,7 +19,7 @@ public static class AuthenticationEndpoints
         //                Token = "jwt-token"
         //            });
         //        });
-        group.MapPost("/register", Register);
+        //group.MapPost("/register", Register);
 
         group.MapPost("/refresh-token", RefreshToken);
 
@@ -38,10 +38,10 @@ public static class AuthenticationEndpoints
         });
     }
 
-    private static async Task<IResult> Register()
-    {
-        throw new NotImplementedException();
-    }
+    //private static async Task<IResult> Register()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     private static async Task<IResult> RefreshToken()
     {

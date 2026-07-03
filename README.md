@@ -1,3 +1,73 @@
+# Architect dùng các nguyên tắc:
+    DDD
+    Clean Architecture
+    CQRS
+    MediatR
+    FluentValidation
+    Result Pattern
+    Repository (chỉ khi thật sự cần)
+    Unit Of Work (nếu cần)
+    Minimal API
+    JWT + Refresh Token
+    Docker
+    YARP
+    Logging
+    Exception Middleware
+    API Versioning (nếu bạn muốn)
+    OpenAPI
+    Seed dữ liệu
+    Không để Business Logic trong Endpoint
+
+# Kiến trúc
+    1. Depend:
+
+    Presentation (Minimal API)
+            │
+            ▼
+    Application
+        Commands
+        Queries
+        Handlers
+        Validators
+        DTO
+        Interfaces
+        Behaviors
+            │
+            ▼
+    Infrastructure
+        Repository
+        DbContext
+        Jwt
+        PasswordHasher
+        RefreshToken
+            │
+            ▼
+    Domain
+
+    2. Clean Architecture yêu cầu gì?
+
+        Dependency luôn phải hướng vào trong.
+
+            Presentation
+                    │
+            Infrastructure
+                    │
+            Application
+                    │
+            Domain
+
+        Application không được biết:
+            EF Core
+            Dapper
+            MongoDB
+            SQL Server
+            Redis
+
+        Application chỉ biết:
+
+            Interface
+            Business Rules
+
 # ECommerce_Demo
 
     1. ApiGateway
