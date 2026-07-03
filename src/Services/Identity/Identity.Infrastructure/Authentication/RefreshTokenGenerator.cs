@@ -1,7 +1,7 @@
 ﻿using Identity.Application.Common.Authentication;
 using System.Security.Cryptography;
 
-namespace Identity.Infrastructure.Infrastructure.Authentication;
+namespace Identity.Infrastructure.Authentication;
 
 public class RefreshTokenGenerator : IRefreshTokenGenerator
 {

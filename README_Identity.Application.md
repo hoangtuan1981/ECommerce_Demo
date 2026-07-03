@@ -105,3 +105,40 @@ Features
 
 # FluentValidation là gì?
 FluentValidation là một thư viện bên thứ ba (third-party library) mã nguồn mở dành cho .NET.
+
+
+# Refactor
+
+    Identity.Application
+    │
+    ├── Features
+    │   └── Authentication
+    │       └── Login
+    │           ├── LoginCommand.cs
+    │           ├── LoginCommandHandler.cs
+    │           ├── LoginCommandValidator.cs
+    │           └── LoginResponse.cs
+    │
+    ├── Common
+    │   ├── Authentication
+    │   │      IJwtTokenGenerator.cs
+    │   │      IRefreshTokenGenerator.cs
+    │   │      IPasswordHasher.cs
+    │   │      ITokenService.cs
+    │   │      JwtToken.cs
+    │   │      LoginTokenResult.cs
+    │   │
+    │   ├── Persistence
+    │   │      IUserRepository.cs
+    │   │      IRefreshTokenRepository.cs
+    │   │      IUnitOfWork.cs
+    │   │
+    │   └── Results
+
+    Identity.Infrastructure
+    │
+    ├── Authentication
+    │      JwtTokenGenerator.cs
+    │      PasswordHasher.cs
+    │      RefreshTokenGenerator.cs
+    │      TokenService.cs

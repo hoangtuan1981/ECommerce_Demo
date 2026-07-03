@@ -1,6 +1,6 @@
 ﻿using Identity.Application.Common.Authentication;
 
-namespace Identity.Infrastructure.Infrastructure.Authentication;
+namespace Identity.Infrastructure.Authentication;
 
 public class PasswordHasher : IPasswordHasher
 {

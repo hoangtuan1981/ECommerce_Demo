@@ -1,6 +1,6 @@
 ﻿using Identity.Application.Common.Authentication;
 using Identity.Application.Common.Persistence;
-using Identity.Infrastructure.Infrastructure.Authentication;
+using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
