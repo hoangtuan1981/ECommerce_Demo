@@ -16,9 +16,7 @@ public class RefreshToken : AuditableEntity
 
     public User User { get; private set; } = default!;
 
-    private RefreshToken()
-    {
-    }
+    private RefreshToken() { } // For EF Core
 
     public RefreshToken(
         Guid userId,
@@ -26,13 +24,9 @@ public class RefreshToken : AuditableEntity
         DateTime expirationDate)
     {
         Id = Guid.NewGuid();
-
         UserId = userId;
-
         Token = token;
-
         ExpirationDate = expirationDate;
-
         IsRevoked = false;
     }
 

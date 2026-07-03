@@ -12,6 +12,15 @@ builder.Services.AddAuthentication();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// MediatR
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+//builder.Services.AddMediatR(typeof(Program));
+
+
+
 var app = builder.Build();
 
 // TODO
@@ -20,6 +29,7 @@ var app = builder.Build();
 //    options.UseSqlServer(
 //        builder.Configuration.GetConnectionString("IdentityDb"));
 //});
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

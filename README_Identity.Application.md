@@ -142,3 +142,14 @@ FluentValidation là một thư viện bên thứ ba (third-party library) mã n
     │      PasswordHasher.cs
     │      RefreshTokenGenerator.cs
     │      TokenService.cs
+
+
+Client
+    ↓
+Raw Refresh Token
+
+DB
+    ↓
+SHA256(Token)
+
+Nếu DB bị lộ thì Refresh Token không dùng được.

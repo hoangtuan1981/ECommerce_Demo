@@ -5,8 +5,7 @@ namespace Identity.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
-    // TODO
-    public string GenerateToken(User user)
+    public JwtToken Generate(User user)
     {
         throw new NotImplementedException();
     }
