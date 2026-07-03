@@ -231,6 +231,6 @@ Ví dụ:
 
 Từ thư mục solution: Add & Update migrations:
 
-dotnet ef migrations add InitialCreate --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+dotnet ef migrations add AddUserNameColumn --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
 
 dotnet ef database update --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
