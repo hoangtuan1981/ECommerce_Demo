@@ -12,7 +12,7 @@ public static class AuthenticationEndpoints
         var group = app.MapGroup("/api/auth")
                        .WithTags("Authentication");
 
-        //group.MapPost("/login", Login);
+        group.MapPost("/login", Login);
         //app.MapPost("/login",
         //        async (LoginRequest request) =>
         //        {
@@ -23,7 +23,7 @@ public static class AuthenticationEndpoints
         //        });
         //group.MapPost("/register", Register);
 
-        app.MapPost("/login", async (LoginCommand command, IMediator mediator) => await mediator.Send(command));
+        //app.MapPost("/login", async (LoginCommand command, IMediator mediator) => await mediator.Send(command));
 
 
         group.MapPost("/refresh-token", RefreshToken);
@@ -35,13 +35,27 @@ public static class AuthenticationEndpoints
         return app;
     }
 
-    private static async Task<IResult> Login(LoginRequest request)
+
+    private static async Task<IResult> Login(
+        LoginRequest request,
+        IMediator mediator)
     {
-        return Results.Ok(new
-        {
-            Token = "jwt-token-test"
-        });
+        var result = await mediator.Send(
+            new LoginCommand(
+                request.Email,
+                request.Password));
+
+        return Results.Ok(result);
     }
+
+
+    //private static async Task<IResult> Login(LoginRequest request)
+    //{
+    //    return Results.Ok(new
+    //    {
+    //        Token = "jwt-token-test"
+    //    });
+    //}
 
     //private static async Task<IResult> Register()
     //{
