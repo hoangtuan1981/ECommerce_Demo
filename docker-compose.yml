@@ -1,0 +1,38 @@
+
+services:
+  identity-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-express
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Hcm@Passw0rd"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+      - F:/Database/mssql/backup:/backup
+      - F:/Database/mssql/scripts:/scripts
+    restart: unless-stopped
+
+  identity-api:
+    build: ./src/Services/Identity/Identity.API
+    depends_on:
+      - identity-db
+    environment:
+      ConnectionStrings__Default: "Server=identity-db,1433;Database=IdentityDb;User Id=sa;Password=Hcm@Passw0rd;TrustServerCertificate=True;"
+
+  apigateway:
+    build: ./src/Gateway/ApiGateway
+    depends_on:
+      - identity-api
+
+  frontend:
+    build: ./src/Frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - apigateway
+
+volumes:
+  mssql_data:
