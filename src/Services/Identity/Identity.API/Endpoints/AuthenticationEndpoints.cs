@@ -48,15 +48,14 @@ public static class AuthenticationEndpoints
         return Results.Ok(result);
     }
 
-
-    //private static async Task<IResult> Login(LoginRequest request)
+    //private static async Task<IResult> LoginV1(
+    //    LoginRequest request, IMediator mediator)
     //{
-    //    return Results.Ok(new
-    //    {
-    //        Token = "jwt-token-test"
-    //    });
+    //    var result = await mediator.Send(new LoginCommand(request.Email, request.Password));
+    //    return result.IsSuccess
+    //        ? Results.Ok(result.Value)
+    //        : Results.BadRequest(result.Errors);
     //}
-
     //private static async Task<IResult> Register()
     //{
     //    throw new NotImplementedException();

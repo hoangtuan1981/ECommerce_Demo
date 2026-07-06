@@ -81,3 +81,8 @@
 dotnet clean
 dotnet restore
 dotnet build
+
+# docker
+docker compose down
+docker compose build --no-cache
+docker compose up
