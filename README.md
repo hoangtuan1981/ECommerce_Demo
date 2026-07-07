@@ -86,3 +86,19 @@ dotnet build
 docker compose down
 docker compose build --no-cache
 docker compose up
+
+
+# Dockerfile
+1. Build rieng le
+    F:\Investigate\eCommerce\src> 
+
+    1. ApiGateway
+    cd src/Gateway/ApiGateway
+    docker build -t ecommerce-apigateway .
+    
+     docker build -t ecommerce-apigateway .
+
+    2. 
+    docker build -t ecommerce-frontend .
+
+    docker build -f Identity.API/Dockerfile -t identity-api .

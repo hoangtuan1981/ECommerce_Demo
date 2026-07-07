@@ -1,11 +1,11 @@
 # Build stage
-FROM node:22-alpine AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 

@@ -1,38 +1,64 @@
-
 services:
   identity-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-express
+
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Hcm@Passw0rd"
       MSSQL_PID: "Express"
+
     ports:
       - "1433:1433"
+
     volumes:
       - mssql_data:/var/opt/mssql
       - F:/Database/mssql/backup:/backup
       - F:/Database/mssql/scripts:/scripts
+
     restart: unless-stopped
 
   identity-api:
-    build: ./src/Services/Identity/Identity.API
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Dockerfile
+
     depends_on:
       - identity-db
+
     environment:
-      ConnectionStrings__Default: "Server=identity-db,1433;Database=IdentityDb;User Id=sa;Password=Hcm@Passw0rd;TrustServerCertificate=True;"
+      ASPNETCORE_ENVIRONMENT: Development
+
+      ConnectionStrings__Default: >
+        Server=identity-db,1433;
+        Database=IdentityDb;
+        User Id=sa;
+        Password=Hcm@Passw0rd;
+        TrustServerCertificate=True;
+
+    ports:
+      - "5001:8080"
 
   apigateway:
-    build: ./src/Gateway/ApiGateway
+    build:
+      context: .
+      dockerfile: src/Gateway/ApiGateway/Dockerfile
+
     depends_on:
       - identity-api
 
-  frontend:
-    build: ./src/Frontend
     ports:
-      - "3000:80"
+      - "5000:8080"
+
+  frontend:
+    build:
+      context: ./src/Frontend
+
     depends_on:
       - apigateway
+
+    ports:
+      - "3000:80"
 
 volumes:
   mssql_data:
