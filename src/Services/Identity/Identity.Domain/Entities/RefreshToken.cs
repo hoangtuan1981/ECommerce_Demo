@@ -1,38 +1,51 @@
 ﻿using Identity.Domain.Common;
+using Identity.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Identity.Domain.Entities;
-
-public class RefreshToken : AuditableEntity
+public sealed class RefreshToken : AuditableEntity
 {
+    private RefreshToken()
+    {
+    }
+
     public Guid UserId { get; private set; }
 
     public string Token { get; private set; } = default!;
 
     public DateTime ExpirationDate { get; private set; }
 
-    public bool IsRevoked { get; private set; }
-
     public DateTime? RevokedAt { get; private set; }
 
+    public string? ReplacedByToken { get; private set; }
+    [NotMapped]
+    public bool IsExpired
+        => DateTime.UtcNow >= ExpirationDate;
+
+    [NotMapped]
+    public bool IsRevoked
+        => RevokedAt.HasValue;
+    [NotMapped]
+    public bool IsActive
+        => !IsExpired && !IsRevoked;
     public User User { get; private set; } = default!;
-
-    private RefreshToken() { } // For EF Core
-
-    public RefreshToken(
+    public static RefreshToken Create(
         Guid userId,
         string token,
-        DateTime expirationDate)
+        DateTime expiresAt)
     {
-        Id = Guid.NewGuid();
-        UserId = userId;
-        Token = token;
-        ExpirationDate = expirationDate;
-        IsRevoked = false;
+        return new RefreshToken
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            Token = token,
+            ExpirationDate = expiresAt
+        };
     }
 
-    public void Revoke()
+    public void Revoke(
+        string? replacedByToken = null)
     {
-        IsRevoked = true;
         RevokedAt = DateTime.UtcNow;
+        ReplacedByToken = replacedByToken;
     }
 }

@@ -1,6 +1,7 @@
 using Identity.API.Endpoints;
 using Identity.Application;
 using Identity.Infrastructure;
+using Identity.Infrastructure.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,13 +36,20 @@ builder.Services.AddOpenApi();
 //builder.Services.AddMediatR(typeof(Program));
 
 var app = builder.Build();
-
 // TODO
 //builder.Services.AddDbContext<IdentityDbContext>(options =>
 //{
 //    options.UseSqlServer(
 //        builder.Configuration.GetConnectionString("IdentityDb"));
 //});
+using (var scope = app.Services.CreateScope())
+{
+    var seeder =
+        scope.ServiceProvider
+            .GetRequiredService<DataSeeder>();
+
+    await seeder.SeedAsync();
+}
 
 
 // Configure the HTTP request pipeline.

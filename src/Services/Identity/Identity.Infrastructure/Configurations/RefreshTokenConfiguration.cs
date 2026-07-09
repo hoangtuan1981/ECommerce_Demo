@@ -53,10 +53,10 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         builder.Property(x => x.ExpirationDate)
             .IsRequired();
 
-        // Revoked
-        builder.Property(x => x.IsRevoked)
-            .HasDefaultValue(false)
-            .IsRequired();
+        //// Revoked
+        //builder.Property(x => x.IsRevoked)
+        //    .HasDefaultValue(false)
+        //    .IsRequired();
 
         // Optimistic Concurrency
         builder.Property(x => x.RowVersion)
@@ -71,11 +71,11 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         // Query Performance
         builder.HasIndex(x => x.UserId);
 
-        builder.HasIndex(x => new
-        {
-            x.UserId,
-            x.IsRevoked
-        });
+        //builder.HasIndex(x => new
+        //{
+        //    x.UserId,
+        //    x.IsRevoked
+        //});
 
         builder.HasIndex(x => x.ExpirationDate);
     }

@@ -1,5 +1,7 @@
 # grok
 
+ F:\Investigate\eCommerce\src\frontend> npm run dev
+
 frontend/
 ├── public/
 ├── src/

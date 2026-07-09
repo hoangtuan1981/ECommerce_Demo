@@ -59,7 +59,7 @@ public sealed class LoginCommandHandler : IRequestHandler<LoginCommand, Result<L
         var generatedRefreshToken = _refreshTokenGenerator.Generate();
 
         // Tạo RefreshToken entity
-        var refreshTokenEntity = new RefreshToken(
+        var refreshTokenEntity = RefreshToken.Create(
             user.Id,
             generatedRefreshToken.Token,
             generatedRefreshToken.ExpiresAt);   // ← Dùng ExpiresAt

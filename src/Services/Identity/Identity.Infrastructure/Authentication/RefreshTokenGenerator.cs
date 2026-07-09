@@ -12,6 +12,11 @@ public class RefreshTokenGenerator : IRefreshTokenGenerator
     //}
     public GeneratedRefreshToken Generate()
     {
-        throw new NotImplementedException();
+        var token = Convert.ToHexString(
+        RandomNumberGenerator.GetBytes(64));
+
+        return new GeneratedRefreshToken(
+        token,
+        DateTime.UtcNow.AddDays(7));
     }
 }

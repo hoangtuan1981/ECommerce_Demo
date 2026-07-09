@@ -3,6 +3,7 @@ using Identity.Application.Common.Authentication;
 using Identity.Application.Common.Persistence;
 using Identity.Infrastructure.Authentication;
 using Identity.Infrastructure.Persistence.Repositories;
+using Identity.Infrastructure.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+
         RegisterDatabase(services, configuration);
 
         RegisterRepositories(services);
@@ -45,6 +48,8 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork>(provider =>
             provider.GetRequiredService<IdentityDbContext>());
+
+        services.AddScoped<DataSeeder>();
     }
 
     private static void RegisterRepositories(IServiceCollection services)

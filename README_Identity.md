@@ -231,6 +231,33 @@ Ví dụ:
 
 Từ thư mục solution: Add & Update migrations:
 
-dotnet ef migrations add AddUserNameColumn --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+dotnet ef migrations add InnitDB --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
 
 dotnet ef database update --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+
+dotnet ef database drop --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+
+dotnet ef migrations remove --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+
+# Tạo lại migration
+1. Xóa migration
+    Remove-Migration
+2. Tạo migration mới
+    Add-Migration InitialCreate
+3. Update database
+    Update-Database
+
+sẽ bị lỗi
+Lỗi này không liên quan đến EF Core nữa mà do bạn đang chạy sai môi trường.
+
+Remove-Migration là lệnh của Entity Framework Core Tools, không phải PowerShell command mặc định.
+
+# logic
+
+Như vậy repository sẽ hỗ trợ đầy đủ các use case:
+
+Login → tạo Refresh Token
+Refresh Token Rotation
+Logout → revoke token
+Logout All Devices → revoke toàn bộ token của user
+Cleanup expired tokens.

@@ -1,9 +1,12 @@
 ﻿using Identity.Domain.Common;
+using Identity.Domain.Entities;
 
-namespace Identity.Domain.Entities;
-
-public class UserRole : AuditableEntity
+public sealed class UserRole : AuditableEntity
 {
+    private UserRole()
+    {
+    }
+
     public Guid UserId { get; private set; }
 
     public Guid RoleId { get; private set; }
@@ -12,16 +15,12 @@ public class UserRole : AuditableEntity
 
     public Role Role { get; private set; } = default!;
 
-    private UserRole()
-    {
-    }
-
-    public UserRole(Guid userId, Guid roleId)
+    public UserRole(
+        Guid userId,
+        Guid roleId)
     {
         Id = Guid.NewGuid();
-
         UserId = userId;
-
         RoleId = roleId;
     }
 }
