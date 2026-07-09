@@ -1,7 +1,8 @@
 // hooks/useLogin.ts
 import { useMutation } from '@tanstack/react-query';
+
+import type { LoginForm } from '../schemas/authSchema';
 import api from '@/api/client';
-import { LoginForm } from '../schemas';
 
 export const useLogin = () => {
   return useMutation({

@@ -1,6 +1,9 @@
 # grok
 
- F:\Investigate\eCommerce\src\frontend> npm run dev
+ F:\Investigate\eCommerce\src\frontend> 
+    npm install
+    npm run build
+    npm run dev
 
 frontend/
 ├── public/
@@ -26,3 +29,5 @@ frontend/
 ├── tsconfig.json
 ├── package.json
 └── dockerfile
+
+
