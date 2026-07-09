@@ -1,4 +1,4 @@
-# Architect dùng các nguyên tắc:
+# Architect use rules:
     DDD
     Clean Architecture
     CQRS
@@ -15,8 +15,7 @@
     Exception Middleware
     API Versioning (nếu bạn muốn)
     OpenAPI
-    Seed dữ liệu
-    Không để Business Logic trong Endpoint
+    Endpoint doesn't contain Business Logic.
 
 # Frontend (ReactJS):
 
@@ -39,11 +38,11 @@ OpenAPI (Swagger).
 ├── src/
 │   ├── Gateway/ApiGateway          # YARP
 │   ├── Services/
-│   │   ├── Identity/               # (dựa repo gốc)
+│   │   ├── Identity/
 │   │   ├── Product/
 │   │   ├── Cart/
 │   │   ├── Order/
-│   │   └── ... (mỗi service theo Clean Arch)
+│   │   └── ... (each service follow Clean Arch)
 │   ├── Shared/                     # Common (DTOs, Events, Exceptions)
 │   └── frontend/                   # React App
 ├── docker-compose.yml
@@ -51,7 +50,7 @@ OpenAPI (Swagger).
 └── README.md
 
 
-# Kiến trúc
+# Architecture
     1. Depend:
 
     Presentation (Minimal API)
@@ -89,14 +88,14 @@ OpenAPI (Swagger).
                     │
             Domain
 
-        Application không được biết:
+        Application doesn't know:
             EF Core
             Dapper
             MongoDB
             SQL Server
             Redis
 
-        Application chỉ biết:
+        Application only know:
 
             Interface
             Business Rules
@@ -107,31 +106,4 @@ OpenAPI (Swagger).
         use Yarp.ReverseProxy:  
 
     2. Identity.Application
-        Chia theo CQRS
-        
-
-# Build lại
-dotnet clean
-dotnet restore
-dotnet build
-
-# docker
-docker compose down
-docker compose build --no-cache
-docker compose up
-
-
-# Dockerfile
-1. Build rieng le
-    F:\Investigate\eCommerce\src> 
-
-    1. ApiGateway
-    cd src/Gateway/ApiGateway
-    docker build -t ecommerce-apigateway .
-    
-     docker build -t ecommerce-apigateway .
-
-    2. 
-    docker build -t ecommerce-frontend .
-
-    docker build -f Identity.API/Dockerfile -t identity-api .
+        Seperate by CQRS
