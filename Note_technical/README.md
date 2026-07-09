@@ -135,3 +135,11 @@ docker compose up
     docker build -t ecommerce-frontend .
 
     docker build -f Identity.API/Dockerfile -t identity-api .
+
+# Frontend chỉ gọi Gateway
+    http://localhost:5175/api/identity/auth/login
+    http://localhost:5175/api/product/products
+    http://localhost:5175/api/cart/items
+    http://localhost:5175/api/order/orders
+
+

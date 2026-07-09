@@ -8,17 +8,32 @@ builder.Services.AddOpenApi();
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-var app = builder.Build();
+//Fix Cors exception when ReactJS App(http://localhost:5173) call service.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("GatewayCors", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
-app.MapReverseProxy();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
+/* giai thich UseHttpsRedirection
+ * FE call http://localhost:5175/api/identity/auth/login
+ * sau đó Gateway thực hiện: 307 Temporary Redirect
+ * sang HTTPS do: app.UseHttpsRedirection();
+ */
+//app.UseHttpsRedirection();
 
 #region "old code"
 //var summaries = new[]
@@ -41,12 +56,8 @@ app.UseHttpsRedirection();
 //.WithName("GetWeatherForecast");
 #endregion "old code"
 
+app.UseCors("GatewayCors");
 //use Yarp
 app.MapReverseProxy();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

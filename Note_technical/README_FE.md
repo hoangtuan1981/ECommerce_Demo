@@ -31,3 +31,22 @@ frontend/
 └── dockerfile
 
 
+
+# Giải thích axios
+    Sử dụng trong hook
+        import { api } from '@/api';
+    Thay vì:
+        import api from '@/api/client';
+
+src/
+├── api/
+│ ├── client.ts
+│ ├── endpoints.ts
+│ ├── interceptors.ts
+│ ├── auth.ts
+│ └── index.ts
+├── features/
+│ ├── auth/
+│ ├── product/
+│ ├── cart/
+│ └── order/
