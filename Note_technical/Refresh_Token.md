@@ -248,3 +248,34 @@
         ------------------------------------------------
         | Product | Cart | Order | Payment | Inventory |
         ------------------------------------------------
+
+
+[ Browser (ReactJS) ]                     [ API Gateway (YARP) ]               [ Identity Service ]
+       │                                            │                                     │
+       │ 1. POST /api/auth/login ──────────────────>│ ───────────────────────────────────>│
+       │                                            │                                     │ (Xác thực thành công)
+       │ <─ 2. Trả về:                              │ <───────────────────────────────────│ (Tạo cặp Token mới)
+       │      - Body JSON: { accessToken }          │ (YARP Forward Headers)              │ (Set HttpOnly Cookie)
+       │      - Cookie: refreshToken (HttpOnly) ────│─────────────────────────────────────│
+       │                                            │                                     │
+       ├────────────────────────────────────────────┼─────────────────────────────────────┤
+       │                                            │                                     │
+       │ 3. Request API (VD: /api/orders)           │                                     │
+       │    Headers: Authorization: Bearer <Access> │                                     │
+       │ ──────────────────────────────────────────>│ ──────────────────> [ Order Service ]
+       │                                            │                     (Tự verify JWT)
+       ├────────────────────────────────────────────┼─────────────────────────────────────┤
+       │                                            │                                     │
+       │ 4. (Access Token hết hạn - 401 hoặc chủ động)                                   │
+       │    POST /api/auth/refresh (Body rỗng) ────>│ ───────────────────────────────────>│
+       │    Browser tự đính kèm HttpOnly Cookie     │                                     │ (Verify Refresh Token)
+       │                                            │                                     │ (Xoay vòng token)
+       │ <─ 5. Trả về Access Token mới (JSON Body)  │ <───────────────────────────────────│ (Set Cookie Refresh mới)
+       │      & ghi đè Cookie Refresh mới           │
+
+# Bản chất HttpOnly Cookie là gì?
+    Không thể chạm tới bằng Code (HttpOnly): Khi trình duyệt nhận được một Cookie có flag HttpOnly, nó sẽ khóa chặt không cho bất kỳ đoạn mã JavaScript nào (document.cookie) truy cập được. Hacker có chèn được script phá hoại cũng không cách nào đọc được refreshToken.
+
+    Tự động gửi đính kèm: Khi gọi API /api/auth/refresh, trình duyệt sẽ tự động đính kèm Cookie này vào Header của request mà anh không cần viết một dòng code JS nào để gán nó vào.
+
+    Chống giả mạo yêu cầu chéo (CSRF): Để an toàn tuyệt đối khi dùng Cookie, ta cần kết hợp thêm flag SameSite=Strict hoặc Lax và Secure (chỉ truyền qua HTTPS).
