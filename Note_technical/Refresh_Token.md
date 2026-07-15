@@ -6,7 +6,18 @@
         "Token để lấy JWT"
         Nó chính là Session.
 
-Trong thiết kế ecommerce-microservices, Refresh Token được sử dụng để giải quyết bài toán cân bằng giữa bảo mật và trải nghiệm người dùng khi triển khai cơ chế xác thực dựa trên JWT (JSON Web Token).
+    Trong thiết kế ecommerce-microservices, Refresh Token được sử dụng để giải quyết bài toán cân bằng giữa bảo mật và trải nghiệm người dùng khi triển khai cơ chế xác thực dựa trên JWT (JSON Web Token).
+
+# Identity Service nên triển khai các nghiệp vụ sau:
+
+    Login → tạo Access Token + Refresh Token.
+    Refresh Token → kiểm tra token còn hiệu lực, rotate sang Refresh Token mới và thu hồi token cũ.
+    Logout → thu hồi Refresh Token hiện tại.
+    Logout All Devices → thu hồi toàn bộ Refresh Token của người dùng.
+    Change Password → thu hồi toàn bộ Refresh Token để buộc đăng nhập lại trên mọi thiết bị.
+    Reuse Detection → phát hiện việc sử dụng lại Refresh Token đã bị thu hồi (dấu hiệu token bị đánh cắp), từ đó có thể vô hiệu hóa toàn bộ các phiên của người dùng và yêu cầu xác thực lại.
+
+    Đây là cách triển khai phổ biến trong các hệ thống microservices quy mô lớn vì vừa giữ được ưu điểm stateless của JWT cho các service nghiệp vụ, vừa đảm bảo khả năng quản lý phiên đăng nhập và thu hồi quyền truy cập khi cần thiết.
 
 1. Vấn đề khi chỉ sử dụng Access Token
 

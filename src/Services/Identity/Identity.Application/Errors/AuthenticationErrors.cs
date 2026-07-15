@@ -1,6 +1,4 @@
-﻿using Identity.Application.Common.Results;
-
-namespace Identity.Application.Errors;
+﻿namespace Identity.Application.Errors;
 
 public static class AuthenticationErrors
 {
@@ -9,4 +7,14 @@ public static class AuthenticationErrors
 
     public static Error UserInactive => Error.Validation(
         "Authentication.UserInactive", "User account is inactive.");
+
+    public static readonly Error InvalidRefreshToken =
+    new(
+        "Authentication.InvalidRefreshToken",
+        "Refresh token is invalid.");
+
+    public static readonly Error RefreshTokenExpired =
+        new(
+            "Authentication.RefreshTokenExpired",
+            "Refresh token has expired.");
 }

@@ -1,4 +1,6 @@
-﻿using Identity.Application.Features.Authentication.Login;
+﻿using Identity.API.Contracts.Authentication;
+using Identity.Application.Features.Authentication.Login;
+using Identity.Application.Features.Authentication.Token;
 using MediatR;
 using Microsoft.AspNetCore.Identity.Data;
 
@@ -61,9 +63,17 @@ public static class AuthenticationEndpoints
     //    throw new NotImplementedException();
     //}
 
-    private static async Task<IResult> RefreshToken()
+    private static async Task<IResult> RefreshToken(
+        RefreshTokenRequest request,
+        IMediator mediator)
     {
-        throw new NotImplementedException();
+        var result = await mediator.Send(
+            new RefreshTokenCommand(
+                request.RefreshToken));
+
+        return result.IsSuccess
+            ? Results.Ok(result.Value)
+            : Results.Unauthorized();
     }
 
     private static async Task<IResult> Logout()
