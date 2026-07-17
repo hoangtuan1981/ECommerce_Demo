@@ -3,7 +3,7 @@
 export const ENDPOINTS = {
   identity: {
     login: '/api/identity/auth/login',
-    refresh: '/api/identity/auth/refresh',
+    refresh: '/api/identity/auth/refresh-token',
     register: '/api/identity/auth/register',
     logout: '/api/identity/auth/logout',
   },

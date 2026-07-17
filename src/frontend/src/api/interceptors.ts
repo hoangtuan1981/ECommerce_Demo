@@ -1,4 +1,5 @@
-import api from './client';
+//import api from './client';
+import { api } from './client';
 import { ENDPOINTS } from './endpoints';
 
 api.interceptors.response.use(
