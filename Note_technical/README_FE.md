@@ -1,3 +1,7 @@
+# TypeScript
+    https://www.typescriptlang.org/
+    
+
 # grok
 
  F:\Investigate\eCommerce\src\frontend> 
