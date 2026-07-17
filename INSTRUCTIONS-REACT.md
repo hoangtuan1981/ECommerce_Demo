@@ -1,21 +1,17 @@
-# FMG.React Instructions
+# React Instructions
 
 ## File Locations
 ```
-FMG.React/areas/contacts/
-├── ManageContacts/
-│   ├── ManageContacts.tsx              ← Main contacts grid page
-│   └── UseSelectedAllServerDataGrid.tsx ← Server-side select all hook
-├── ManageGroups/
-│   ├── ManageGroups.tsx                ← Groups listing grid page
-│   └── GroupDetail.tsx                 ← Group detail with contacts grid
-└── shared/
-    ├── index.ts                        ← Barrel exports
-    ├── checkboxSelectionColumn.tsx     ← Custom checkbox column with SelectionContext
-    ├── styledComponents.ts             ← Styled components (GridHeader, GridTitle, etc.)
-    ├── NoRecordsFoundOverlay.tsx       ← Empty state overlay
-    ├── commonStyles.ts                 ← Shared MUI styles
-    └── useGridState.ts                 ← Generic grid state management hook
+frontend/src/features/
+└── feature-name/
+    ├── hooks/
+    ├── pages/
+    ├── schemas/
+    ├── store/
+    ├── components/
+    ├── services/
+    ├── types/
+    └── index.ts
 ```
 
 ## FmgDataGrid (MUI X Data Grid Pro)
