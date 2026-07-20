@@ -7,13 +7,15 @@
     Result Pattern
     Repository (chỉ khi thật sự cần)
     Unit Of Work (nếu cần)
-    Minimal API
     JWT + Refresh Token
     Docker
     YARP
     Logging
     Exception Middleware
-    API Versioning (nếu bạn muốn)
+    Minimal API hoặc RESTful API
+    API Versioning:
+        /api/v1/products
+        /api/v2/products
     OpenAPI
     Endpoint doesn't contain Business Logic.
 

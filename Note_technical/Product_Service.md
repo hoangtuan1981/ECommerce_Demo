@@ -1,3 +1,5 @@
+# Microsoft 365 copilot
+
 Dựa trên cấu trúc Identity Service trong file của bạn và kiến trúc đã chọn (DDD + Clean Architecture + CQRS + MediatR + FluentValidation + Result Pattern + EF Core + Minimal API), tôi đề xuất xây dựng Product Service theo đúng pattern hiện tại để đảm bảo đồng nhất giữa các microservices.
 
 1. Tạo Solution Structure cho Product Service

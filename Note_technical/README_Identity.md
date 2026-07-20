@@ -231,13 +231,18 @@ Ví dụ:
 
 Từ thư mục solution: Add & Update migrations:
 
-dotnet ef migrations add InnitDB --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+    1. Identity
+        dotnet ef migrations add InnitDB --context IdentityDbContext --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
 
-dotnet ef database update --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+        dotnet ef database update --context IdentityDbContext --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
 
-dotnet ef database drop --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+        dotnet ef database drop --context IdentityDbContext --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
 
-dotnet ef migrations remove --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+        dotnet ef migrations remove --context IdentityDbContext --project src/Services/Identity/Identity.Infrastructure --startup-project src/Services/Identity/Identity.API
+
+    2. Product
+        dotnet ef migrations add InnitDB --context ProductDbContext --project src/Services/Product/Product.Infrastructure --startup-project src/Services/Product/Product.API
+        dotnet ef database update --context ProductDbContext --project src/Services/Product/Product.Infrastructure --startup-project src/Services/Product/Product.API
 
 # Tạo lại migration
 1. Xóa migration
