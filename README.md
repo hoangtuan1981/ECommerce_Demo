@@ -109,3 +109,9 @@ OpenAPI (Swagger).
 
     2. Identity.Application
         Seperate by CQRS
+
+# cài package hỗ trợ API Versioning chính thức của .NET:
+
+Package: Asp.Versioning.Http (cho Minimal API)
+
+Package: Asp.Versioning.Mvc (cho Controller)
