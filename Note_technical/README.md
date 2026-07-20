@@ -143,3 +143,35 @@ docker compose up
     http://localhost:5175/api/order/orders
 
 
+# EshopOnContainer BFF vs Gateway
+1. chatGPT
+    1. structure
+                    Browser
+                    │
+                    │
+                React / Blazor
+                    │
+                ┌────────────┐
+                │     BFF    │
+                └────────────┘
+                        │
+                ┌──────────────┐
+                │ API Gateway  │
+                └──────────────┘
+            ┌────────┬─────────┬──────────┐
+            │        │         │          │
+    Catalog Identity Basket Ordering ...
+    2. Giải pháp BFF
+    Tạo backend riêng cho từng frontend:
+        Web
+        |
+        Web BFF
+        |
+        Microservices
+
+
+        Mobile
+        |
+        Mobile BFF
+        |
+        Microservices
