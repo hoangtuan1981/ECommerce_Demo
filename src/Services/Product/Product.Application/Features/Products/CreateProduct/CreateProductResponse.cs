@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Product.Application.Features.Products.CreateProduct;
 
-namespace Product.Application.Features.Products.CreateProduct
-{
-    internal class CreateProductResponse
-    {
-    }
-}
+public sealed record CreateProductResponse(
+    Guid Id,
+    string Name,
+    decimal Price,
+    int StockQuantity
+);

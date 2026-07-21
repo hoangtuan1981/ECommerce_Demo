@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation;
 
-namespace Product.Application.Features.Products.UpdateProduct
+namespace Product.Application.Features.Products.UpdateProduct;
+
+public sealed class UpdateProductCommandValidator
+    : AbstractValidator<UpdateProductCommand>
 {
-    internal class UpdateProductCommandValidator
+    public UpdateProductCommandValidator()
     {
+        RuleFor(x => x.ProductId)
+            .NotEmpty();
+
+        RuleFor(x => x.Name)
+            .NotEmpty()
+            .MaximumLength(200);
+
+        RuleFor(x => x.Price)
+            .GreaterThan(0);
+
+        RuleFor(x => x.StockQuantity)
+            .GreaterThanOrEqualTo(0);
     }
 }

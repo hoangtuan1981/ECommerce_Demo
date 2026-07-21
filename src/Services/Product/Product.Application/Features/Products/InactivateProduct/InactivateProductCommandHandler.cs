@@ -4,17 +4,16 @@ using Product.Application.Common.Results;
 using Product.Application.Features.Products.CreateProduct;
 using Product.Domain.Entities;
 
-namespace Product.Application.Features.Products.DeleteProduct;
+namespace Product.Application.Features.Products.InactivateProduct;
 
-public sealed class DeleteProductCommandHandler
-    : IRequestHandler<
-        DeleteProductCommand,
-        Result<DeleteProductResponse>>
+public sealed class InactivateProductCommandHandler
+    : IRequestHandler<InactivateProductCommand,
+        Result<InactivateProductResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteProductCommandHandler(
+    public InactivateProductCommandHandler(
         IProductRepository repository,
         IUnitOfWork unitOfWork)
     {
@@ -22,8 +21,8 @@ public sealed class DeleteProductCommandHandler
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<DeleteProductResponse>> Handle(
-        DeleteProductCommand request,
+    public async Task<Result<InactivateProductResponse>> Handle(
+        InactivateProductCommand request,
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetByIdAsync(
@@ -32,7 +31,7 @@ public sealed class DeleteProductCommandHandler
 
         if (product is null)
         {
-            return Result<DeleteProductResponse>.Failure(
+            return Result<InactivateProductResponse>.Failure(
                 Error.NotFound(
                     "Product.NotFound",
                     "Product not found."));
@@ -41,10 +40,9 @@ public sealed class DeleteProductCommandHandler
         // TODO
         //product.Status = ProductStatus.Inactive;
 
-        await _unitOfWork.SaveChangesAsync(
-            cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new DeleteProductResponse(
+        return new InactivateProductResponse(
             product.Id,
             product.Status);
     }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Product.Domain.Entities;
 
-namespace Product.Application.Features.Products.DeleteProduct
-{
-    internal class DeleteProductResponse
-    {
-    }
-}
+namespace Product.Application.Features.Products.DeleteProduct;
+
+public sealed record DeleteProductResponse(
+    Guid Id,
+    ProductStatus Status
+);

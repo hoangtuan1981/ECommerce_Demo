@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Product.Domain.Entities;
 
-namespace Product.Application.Common.Persistence
+namespace Product.Application.Common.Persistence;
+
+public interface ICategoryRepository
 {
-    public interface ICategoryRepository
-    {
-    }
+    Task<Category?> GetByIdAsync(
+        Guid id,
+        CancellationToken cancellationToken);
 }

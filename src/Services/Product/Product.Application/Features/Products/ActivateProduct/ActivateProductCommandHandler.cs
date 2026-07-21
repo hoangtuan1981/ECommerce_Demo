@@ -1,20 +1,18 @@
-﻿using MediatR;
+﻿using Product.Application.Common.Results;
+using MediatR;
 using Product.Application.Common.Persistence;
-using Product.Application.Common.Results;
-using Product.Application.Features.Products.CreateProduct;
 using Product.Domain.Entities;
 
-namespace Product.Application.Features.Products.DeleteProduct;
+namespace Product.Application.Features.Products.ActivateProduct;
 
-public sealed class DeleteProductCommandHandler
-    : IRequestHandler<
-        DeleteProductCommand,
-        Result<DeleteProductResponse>>
+public sealed class ActivateProductCommandHandler
+    : IRequestHandler<ActivateProductCommand,
+        Result<ActivateProductResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteProductCommandHandler(
+    public ActivateProductCommandHandler(
         IProductRepository repository,
         IUnitOfWork unitOfWork)
     {
@@ -22,8 +20,8 @@ public sealed class DeleteProductCommandHandler
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<DeleteProductResponse>> Handle(
-        DeleteProductCommand request,
+    public async Task<Result<ActivateProductResponse>> Handle(
+        ActivateProductCommand request,
         CancellationToken cancellationToken)
     {
         var product = await _repository.GetByIdAsync(
@@ -32,19 +30,18 @@ public sealed class DeleteProductCommandHandler
 
         if (product is null)
         {
-            return Result<DeleteProductResponse>.Failure(
+            return Result<ActivateProductResponse>.Failure(
                 Error.NotFound(
                     "Product.NotFound",
                     "Product not found."));
         }
 
-        // TODO
-        //product.Status = ProductStatus.Inactive;
+        //TODO
+        //product.Status = ProductStatus.Active;
 
-        await _unitOfWork.SaveChangesAsync(
-            cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return new DeleteProductResponse(
+        return new ActivateProductResponse(
             product.Id,
             product.Status);
     }

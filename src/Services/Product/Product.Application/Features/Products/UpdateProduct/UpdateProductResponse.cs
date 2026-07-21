@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Product.Application.Features.Products.UpdateProduct;
 
-namespace Product.Application.Features.Products.UpdateProduct
-{
-    internal class UpdateProductResponse
-    {
-    }
-}
+public sealed record UpdateProductResponse(
+    Guid Id,
+    string Name,
+    decimal Price,
+    int StockQuantity
+);
