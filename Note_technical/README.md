@@ -175,3 +175,7 @@ docker compose up
         Mobile BFF
         |
         Microservices
+
+
+# Swagger
+    dotnet add package Swashbuckle.AspNetCore

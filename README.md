@@ -117,3 +117,10 @@ Package: Asp.Versioning.Http (cho Minimal API)
 Package: Asp.Versioning.Mvc (cho Controller)
 
 # Don't read .md files in Note_technical folder
+
+# Swagger
+    package:
+        dotnet add package Swashbuckle.AspNetCore
+    product api swagger:
+        https://localhost:7002/swagger/index.html
+

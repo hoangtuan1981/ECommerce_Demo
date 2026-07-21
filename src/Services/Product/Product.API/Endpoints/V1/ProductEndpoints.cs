@@ -10,11 +10,12 @@ namespace Product.API.Endpoints.V1;
 
 public static class ProductEndpoints
 {
-    public static IEndpointRouteBuilder MapAuthenticationEndpoints(
+    const string product_group_v1 = "/api/v1";
+    public static IEndpointRouteBuilder MapProductEndpoints(
         this IEndpointRouteBuilder app)
     {
-        var v1 = app.MapGroup("/api/v1")
-                    .WithTags("product");
+        var v1 = app.MapGroup(product_group_v1)
+                    .WithTags("Products");
 
         v1.MapPost("/", CreateProduct);
 
@@ -53,7 +54,7 @@ public static class ProductEndpoints
         }
 
         return Results.Created(
-            $"/api/v1/products/{result.Value.Id}",
+            $"{product_group_v1}/products/{result.Value.Id}",
             result.Value);
     }
 

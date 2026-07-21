@@ -1,14 +1,28 @@
-using Product.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using Product.Application;
 using Asp.Versioning;
+using Microsoft.EntityFrameworkCore;
+using Product.API.Endpoints.V1;
+using Product.Application;
+using Product.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddEndpointsApiExplorer();
 
 // Application
 builder.Services.AddApplication();
 // Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new()
+    {
+        Title = "Product API",
+        Version = "v1"
+    });
+
+    // JWT nếu có
+});
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -21,6 +35,13 @@ var apiVersionSet = app.NewApiVersionSet()
     .HasApiVersion(new ApiVersion(2, 0))
     .ReportApiVersions()
     .Build();
+
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Product API");
+});
 
 //builder.Services.AddDbContext<ProductDbContext>(options =>
 //{
@@ -35,6 +56,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapProductEndpoints();
 
 app.Run();
 
