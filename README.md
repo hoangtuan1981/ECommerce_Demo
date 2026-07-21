@@ -18,7 +18,7 @@
         /api/v2/products
     OpenAPI
     Endpoint doesn't contain Business Logic.
-
+    Aggregate Root in Microservices
 # Frontend (ReactJS):
 
 Vite + React 18 + TypeScript.
@@ -115,3 +115,5 @@ OpenAPI (Swagger).
 Package: Asp.Versioning.Http (cho Minimal API)
 
 Package: Asp.Versioning.Mvc (cho Controller)
+
+# Don't read .md files in Note_technical folder

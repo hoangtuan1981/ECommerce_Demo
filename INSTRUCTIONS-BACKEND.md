@@ -5,6 +5,7 @@
 - **Autofac** for dependency injection (each feature has its own `AutofacModule.cs`)
 - **Feature folders**: `Core/FMG.Integrations.Applications/Features/{Domain}/{FeatureName}/`
 - **Infrastructure implementations**: `InfrastructureLayer/FMG.Integrations.Infrastructures/Features/{Domain}/{FeatureName}/`
+- **Apply Aggregate Root pattern in Microservices
 
 ## API Versioning
 - Versioned via `[ApiVersion("X.0")]` attribute
