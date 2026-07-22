@@ -17,6 +17,7 @@
     OpenAPI
     Seed dữ liệu
     Không để Business Logic trong Endpoint
+    BFF service
 
 # Frontend (ReactJS):
 
@@ -176,6 +177,19 @@ docker compose up
         |
         Microservices
 
+    3. project (Recomandation)
+        Client
+        |
+        v
+        YARP Gateway
+        |
+        v
+        BFF
+        |
+        +--> Product Service
+        +--> Order Service
+        +--> Inventory Service
+        +--> Identity Service
 
 # Swagger
     dotnet add package Swashbuckle.AspNetCore

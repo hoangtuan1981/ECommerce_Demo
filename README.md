@@ -5,30 +5,31 @@
     MediatR
     FluentValidation
     Result Pattern
-    Repository (chỉ khi thật sự cần)
-    Unit Of Work (nếu cần)
+    Repository (if needed)
+    Unit Of Work (if needed)
     JWT + Refresh Token
     Docker
     YARP
     Logging
     Exception Middleware
-    Minimal API hoặc RESTful API
+    Minimal API or RESTful API
     API Versioning:
         /api/v1/products
         /api/v2/products
-    OpenAPI
+    OpenAPI (Swagger)
     Endpoint doesn't contain Business Logic.
     Aggregate Root in Microservices
+    BFF service use YARP (Aggregation)
 # Frontend (ReactJS):
 
 Vite + React 18 + TypeScript.
-State: Zustand (hoặc Redux Toolkit).
+State: Zustand (or Redux Toolkit).
 API: Axios + interceptors (auto refresh token).
 UI: shadcn/ui + Tailwind + TanStack Query.
 Auth: Context + Protected Routes.
 Routing: React Router v6.4+ (file-based hoặc config).
 
-Công nghệ Cross-cutting:
+Cross-cutting:
 
 Docker + docker-compose (multi-service).
 JWT + Refresh Token Rotation (secure).
@@ -48,7 +49,7 @@ OpenAPI (Swagger).
 │   ├── Shared/                     # Common (DTOs, Events, Exceptions)
 │   └── frontend/                   # React App
 ├── docker-compose.yml
-├── .env
+├── .env (if needed)
 └── README.md
 
 
@@ -78,7 +79,7 @@ OpenAPI (Swagger).
             ▼
     Domain
 
-    2. Clean Architecture yêu cầu gì?
+    2. What does Clean Architecture require?
 
         Dependency luôn phải hướng vào trong.
 
@@ -98,17 +99,46 @@ OpenAPI (Swagger).
             Redis
 
         Application only know:
-
             Interface
             Business Rules
 
 # ECommerce_Demo
 
-    1. ApiGateway
+    1. ApiGateway --> BFF
         use Yarp.ReverseProxy:  
 
     2. Identity.Application
         Seperate by CQRS
+
+    React
+
+        |
+
+        BFF
+
+        |
+
+    -------------------------
+
+    Catalog API
+
+    Order API
+
+    Identity API
+
+    Payment API
+
+    3. BFF sẽ Aggregation
+        GET /home
+        ↓
+        Catalog
+        ↓
+        Promotion
+        ↓
+        Recommendation
+        ↓
+        Return
+        Một request thay vì: React --> 4 APIs
 
 # cài package hỗ trợ API Versioning chính thức của .NET:
 
@@ -123,4 +153,5 @@ Package: Asp.Versioning.Mvc (cho Controller)
         dotnet add package Swashbuckle.AspNetCore
     product api swagger:
         https://localhost:7002/swagger/index.html
-
+# Health check
+    dotnet add package Microsoft.AspNetCore.Diagnostics.HealthChecks
