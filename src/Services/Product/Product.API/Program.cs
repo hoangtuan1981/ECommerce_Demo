@@ -25,6 +25,22 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Add services to the container.
+// HealthCheck
+builder.Services.AddHealthChecks();
+/*
+    builder.Services.AddHealthChecks()
+        .AddSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConnection")!,
+            name: "sqlserver",
+            tags: ["db"]);
+
+    builder.Services.AddHealthChecks()
+        .AddNpgSql(
+            builder.Configuration.GetConnectionString("DefaultConnection")!,
+            name: "postgres",
+            tags: ["db"]);
+ */
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

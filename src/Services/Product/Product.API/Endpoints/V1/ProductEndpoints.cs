@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Product.API.Contracts.Products;
 using Product.Application.Features.Products.ActivateProduct;
 using Product.Application.Features.Products.CreateProduct;
 using Product.Application.Features.Products.DeleteProduct;
 using Product.Application.Features.Products.InactivateProduct;
 using Product.Application.Features.Products.UpdateProduct;
+using static FluentValidation.Validators.PredicateValidator;
 
 namespace Product.API.Endpoints.V1;
 
@@ -30,6 +32,12 @@ public static class ProductEndpoints
         v1.MapPost(
             "/{id:guid}/inactivate",
             InactivateProduct);
+
+        v1.MapHealthChecks("/health/live",
+                new HealthCheckOptions
+                {
+                    Predicate = _ => false
+                });
 
         return app;
     }
